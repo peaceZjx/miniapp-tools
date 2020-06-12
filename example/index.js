@@ -1,1 +1,1 @@
-const { helper } = require('../dist/mini-utils.umd')
+const { helper } = require('../dist/miniapp-tools.umd')

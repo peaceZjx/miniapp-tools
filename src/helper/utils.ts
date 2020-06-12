@@ -35,3 +35,7 @@ export function isPlainObject(val: any): val is Object {
 export function isArray(val: any): val is any[] {
 	return toString.call(val, null) === '[object Array]'
 }
+
+export function sd() {
+	console.log(1)
+}

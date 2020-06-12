@@ -1,10 +1,10 @@
 {
-	"name": "mini-utils",
+	"name": "miniapp-tools",
 	"version": "0.0.1",
 	"description": "",
 	"keywords": [],
-	"main": "dist/mini-utils.umd.js",
-	"module": "dist/mini-utils.es5.js",
+	"main": "dist/miniapp-tools.umd.js",
+	"module": "dist/miniapp-tools.es5.js",
 	"typings": "dist/types/index.d.ts",
 	"files": [
 		"dist"
