@@ -43,7 +43,7 @@ export function isArray(val: any): val is any[] {
  */
 export const promisely = (func: any, args?: any) => {
 	if (typeof func !== 'function') {
-		return console.warn('[promisely] 第一个参数是函数')
+		return Promise.reject('[promisely] 第一个参数是函数')
 	}
 	return new Promise((resolve, reject) => {
 		func({
