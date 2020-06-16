@@ -3,11 +3,11 @@
  * @param func 被promise化的函数
  * @param args 传递给这个函数的参数
  */
-export const promisely = (func: any, args?: any) => {
+export const promisely = <T = any>(func: any, args?: any) => {
 	if (typeof func !== 'function') {
 		return Promise.reject('[promisely] 第一个参数是函数')
 	}
-	return new Promise((resolve, reject) => {
+	return new Promise<T>((resolve, reject) => {
 		func({
 			...args,
 			success: resolve,
