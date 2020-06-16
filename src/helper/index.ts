@@ -1,1 +1,1 @@
-export { isObject, isPlainObject, isArray, assertType } from './utils'
+export { isObject, isPlainObject, isArray, assertType, promisely } from './utils'
