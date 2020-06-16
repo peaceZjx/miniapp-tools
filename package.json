@@ -1,6 +1,6 @@
 {
-	"name": "miniapp-tools",
-	"version": "0.0.1",
+	"name": "@i965/miniapp-tools",
+	"version": "0.0.3",
 	"description": "",
 	"keywords": [],
 	"main": "dist/miniapp-tools.umd.js",
