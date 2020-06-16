@@ -1,10 +1,10 @@
 {
-	"name": "@i965/miniapp-tools",
-	"version": "0.0.6",
+	"name": "@i965/mini-tools",
+	"version": "0.0.1",
 	"description": "",
 	"keywords": [],
-	"main": "dist/miniapp-tools.umd.js",
-	"module": "dist/miniapp-tools.es5.js",
+	"main": "dist/mini-tools.umd.js",
+	"module": "dist/mini-tools.es5.js",
 	"typings": "dist/types/index.d.ts",
 	"files": [
 		"dist"
