@@ -16,24 +16,19 @@ export interface ROptions extends WechatMiniprogram.RequestOption {
 	token?: string
 }
 
-export type ResponseData = {
+export type ResponseData<T> = {
 	error?: string
-	message?: string
+	message: string
 	path?: string
 	status?: number
-	data?: {
-		code?: number
-		result?: AnyObject
-	}
-} & AnyObject
-
-export interface Response<T = ResponseData> extends WechatMiniprogram.RequestSuccessCallbackResult {
-	data: WechatMiniprogram.RequestSuccessCallbackResult['data'] & T
+	code?: number
+	result?: AnyObject
+} & T
+export interface Response<T> extends WechatMiniprogram.RequestSuccessCallbackResult {
+	data: WechatMiniprogram.RequestSuccessCallbackResult['data'] & ResponseData<T>
 }
 
-export interface RequestPromise<T = AnyObject> extends Promise<Response<T>> {}
-
-export class Request {
+export default class Request {
 	public pendingQueue: any
 	public conf: Rconf
 	public options: ROptions
@@ -61,7 +56,7 @@ export class Request {
 	}
 
 	// 请求之后，用于封装返回值
-	after(afterHandler: (resolve: (value?: any) => void, reject: (value?: any) => void, response: ResponseData) => any) {
+	after(afterHandler: (resolve: (value?: any) => void, reject: (value?: any) => void, response: ResponseData<AnyObject>) => any) {
 		if (typeof afterHandler !== 'function') {
 			return console.warn('[ after ] 参数只支持函数 ')
 		}
@@ -135,11 +130,11 @@ export class Request {
 			})
 	}
 
-	request(options: ROptions) {
+	request<T>(options: ROptions) {
 		const { baseURL, loginUrl } = this.conf
 		const header = { ...this.conf.header, ...options.header }
 		options = { ...this.conf, ...options, header }
-		const p = new Promise<Response<ResponseData>>(async (resolve, reject) => {
+		const p = new Promise<Response<ResponseData<T>>>(async (resolve, reject) => {
 			if (!loginUrl) {
 				this.doRequest(options, resolve, reject)
 			} else {
@@ -161,21 +156,21 @@ export class Request {
 		return p
 	}
 
-	post(config: ROptions) {
+	post<T>(config: ROptions) {
 		config.method = 'POST'
-		return this.request(config)
+		return this.request<T>(config)
 	}
 
-	get(config: ROptions) {
+	get<T>(config: ROptions) {
 		config.method = 'GET'
-		return this.request(config)
+		return this.request<T>(config)
 	}
 
-	uploadFile(config: ROptions) {
+	uploadFile<T>(config: ROptions) {
 		config.header = {
 			'Content-Type': 'multipart/form-data',
 		}
 		config.type = 'uploadFile'
-		return this.request(config)
+		return this.request<T>(config)
 	}
 }

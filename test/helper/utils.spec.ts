@@ -1,4 +1,6 @@
-import { isObject, isPlainObject, isArray, assertType } from '../../src/helper'
+import { isObject, isPlainObject, isArray, assertType } from '../../src/common'
+// import { Request, promisely } from '../../src/mp'
+// import { Response } from '../../src/mp/request'
 
 describe('helpers:util', () => {
 	describe('isXXX', () => {
