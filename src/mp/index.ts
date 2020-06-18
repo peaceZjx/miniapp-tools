@@ -1,2 +1,7 @@
-export { promisely } from './tools'
-export { default as Request } from './request'
+import Request from './request'
+import { promisely } from './tools'
+
+export default {
+	Request,
+	promisely,
+}

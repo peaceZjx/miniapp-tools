@@ -1,11 +1,11 @@
 {
 	"name": "@i965/mini-tools",
-	"version": "0.0.8",
+	"version": "0.0.10",
 	"description": "",
 	"keywords": [],
 	"main": "dist/mini-tools.umd.js",
 	"module": "dist/mini-tools.es5.js",
-	"typings": "dist/types/index.d.ts",
+	"typings": "dist/types",
 	"files": [
 		"dist"
 	],
