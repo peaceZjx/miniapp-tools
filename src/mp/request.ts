@@ -144,11 +144,11 @@ export default class Request {
 				const token = await this.getToken()
 				this.token = token as string
 				options.token = this.token
-				this._before(options)
 				const url = baseURL + options.url
 				if (!url.includes(loginUrl) && !token) {
 					this.handleNotAuthRequest(options, resolve, reject)
 				} else {
+					this._before(options)
 					this.doRequest(options, resolve, reject)
 				}
 			}

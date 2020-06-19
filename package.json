@@ -1,6 +1,6 @@
 {
 	"name": "@i965/mini-tools",
-	"version": "0.0.10",
+	"version": "0.0.11",
 	"description": "",
 	"keywords": [],
 	"main": "dist/mini-tools.umd.js",
