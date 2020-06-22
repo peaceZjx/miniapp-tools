@@ -16,16 +16,16 @@ export interface ROptions extends WechatMiniprogram.RequestOption {
 	token?: string
 }
 
-export type ResponseData<T> = {
+export type ResponseData = {
 	error?: string
 	message: string
 	path?: string
 	status?: number
 	code?: number
 	result?: AnyObject
-} & T
+} & AnyObject
 export interface Response<T> extends WechatMiniprogram.RequestSuccessCallbackResult {
-	data: WechatMiniprogram.RequestSuccessCallbackResult['data'] & ResponseData<T>
+	data: WechatMiniprogram.RequestSuccessCallbackResult['data'] & ResponseData
 }
 
 export default class Request {
@@ -56,7 +56,7 @@ export default class Request {
 	}
 
 	// 请求之后，用于封装返回值
-	after(afterHandler: (resolve: (value?: any) => void, reject: (value?: any) => void, response: ResponseData<AnyObject>) => any) {
+	after(afterHandler: (resolve: (value?: any) => void, reject: (value?: any) => void, response: Response<ResponseData>) => any) {
 		if (typeof afterHandler !== 'function') {
 			return console.warn('[ after ] 参数只支持函数 ')
 		}
@@ -130,11 +130,11 @@ export default class Request {
 			})
 	}
 
-	request<T>(options: ROptions) {
+	request<T = Response<ResponseData>>(options: ROptions) {
 		const { baseURL, loginUrl } = this.conf
 		const header = { ...this.conf.header, ...options.header }
 		options = { ...this.conf, ...options, header }
-		const p = new Promise<Response<ResponseData<T>>>(async (resolve, reject) => {
+		const p = new Promise<T>(async (resolve, reject) => {
 			if (!loginUrl) {
 				this.doRequest(options, resolve, reject)
 			} else {
@@ -156,21 +156,21 @@ export default class Request {
 		return p
 	}
 
-	post<T>(config: ROptions) {
+	post(config: ROptions) {
 		config.method = 'POST'
-		return this.request<T>(config)
+		return this.request(config)
 	}
 
-	get<T>(config: ROptions) {
+	get(config: ROptions) {
 		config.method = 'GET'
-		return this.request<T>(config)
+		return this.request(config)
 	}
 
-	uploadFile<T>(config: ROptions) {
+	uploadFile(config: ROptions) {
 		config.header = {
 			'Content-Type': 'multipart/form-data',
 		}
 		config.type = 'uploadFile'
-		return this.request<T>(config)
+		return this.request(config)
 	}
 }
