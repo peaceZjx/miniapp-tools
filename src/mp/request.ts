@@ -108,6 +108,7 @@ export default class Request {
 	}
 
 	async doRequest(options: ROptions, resolve: (value?: any) => void, reject: (value?: any) => void) {
+		this._before(options)
 		options.url = this.conf.baseURL + options.url
 		const requestType = {
 			request: wx.request,
@@ -148,7 +149,6 @@ export default class Request {
 				if (!url.includes(loginUrl) && !token) {
 					this.handleNotAuthRequest(options, resolve, reject)
 				} else {
-					this._before(options)
 					this.doRequest(options, resolve, reject)
 				}
 			}
